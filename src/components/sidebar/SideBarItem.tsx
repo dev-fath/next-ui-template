@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 
-import { useRouter } from 'next/router';
+import { usePathname, useRouter } from 'next/navigation';
 
 import { IMainMenuTitleInfo, INormalMenuTitleInfo, MenuTitleActionEnum } from './Sidebar';
 
@@ -17,6 +17,8 @@ interface ISideBarItemProps {
 
 const SideBarItem = ({ titleData, dropDownMenuData }: ISideBarItemProps) => {
   const router = useRouter();
+  const pathName = usePathname()
+  const basePath = process.env.basePath;
 
   const btnDropdownRef = useRef<HTMLButtonElement>(null);
   const popoverDropdownRef = useRef<HTMLDivElement>(null);
@@ -27,8 +29,8 @@ const SideBarItem = ({ titleData, dropDownMenuData }: ISideBarItemProps) => {
 
   const onClickButton = () => {
     if (action === MenuTitleActionEnum.LINK) {
-      if (router.route === route) {
-        router.replace(router.basePath);
+      if (pathName === route) {
+        router.replace(basePath ?? '/');
       } else {
         router.push(route);
       }
@@ -38,8 +40,8 @@ const SideBarItem = ({ titleData, dropDownMenuData }: ISideBarItemProps) => {
   };
 
   const onClickDropDownMenu = (route: string) => () => {
-    if (router.route === route) {
-      router.replace(router.basePath);
+    if (pathName === route) {
+      router.replace(basePath ?? '/');
     } else {
       router.push(route);
     }

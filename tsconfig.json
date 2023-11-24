@@ -21,10 +21,11 @@
     ],
     "baseUrl": "src",
     "paths": {
-      "@/*": ["./*"],
+      "@/*": ["./src/*"],
       "@api/*": ["pages/api/*"],
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
+      "@config/*": ["config/*"],
       "@constants/*": ["constants/*"],
       "@contexts/*": ["contexts/*"],
       "@hooks/*": ["hooks/*"],
